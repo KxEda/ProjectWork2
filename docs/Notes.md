@@ -1,0 +1,54 @@
+## Notes ##
+Digital Bank
+- successful login --> HomePage
+  - Dashboard (4) + "Welcome (userFirstName)"
+    - Account Balance Summary
+    - Deposit vs. Withdraw (Last 3 Months)
+    - Withdraw By Category (Last 3 Months)
+    - Deposit By Category (Last 3 Months)
+- left side - Menu:
+  - can be collapsed
+  
+  - DigitalBank
+    - Home
+    
+  - BANKING ACCOUNTS
+    - Checking
+      - View Checking
+        - Transactions
+      - New Checking
+        - New Checking Account
+    - Savings
+      - View Savings
+        - Transactions
+      - New Savings
+        - New Savings Account
+    - External
+      - Link External Account
+        - Add Open Banking Account
+      - View External Accounts
+        - (if empty) -->pop-up: NO Linked Accounts --> Continue --> Add Open Banking Account (prev.)
+        - Transactions
+      
+  - TRANSACTIONS/TRANSFERS
+    - Deposit
+      - Deposit into Account
+    - Withdraw
+      - Withdraw from Account
+    - Transfer Between Accounts
+      - Transfer Between Accounts
+    - VISA Direct Transfer
+      - Direct Payment to VISA
+- top - Menu:
+  - Search --> ATM
+  - Notifications
+  - E-mails
+  - About
+  - Language
+  - Profile
+    - My Profile
+    - Change Password
+    - Create Data
+    - Delete Data
+    - Logout
+  - 

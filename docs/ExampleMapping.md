@@ -1,0 +1,96 @@
+US: Digital Bank online banking
+
+- Rule-1: az ügyfél regisztrálva van
+  - Example-1: érvényes belépési adatok
+    - Given banki ügyfél regisztrálva van
+    - When megadja a helyes felhasználónevet
+    - And megadja a helyes jelszót
+    - Then a belépés a banki felületre sikeres
+  - Example-2: érvénytelen felhasználónév
+    - Given banki ügyfél regisztrálva van
+    - When megad egy helytelen felhasználónevet
+    - And megadja a helyes jelszót
+    - Then a belépés a banki felületre sikertelen, error: Invalid credentials or access not granted due to user account status or an existing user session.
+  - Example-3: érvénytelen jelszó
+    - Given banki ügyfél regisztrálva van
+    - When megadja a helyes felhasználónevet
+    - And megad egy helytelen jelszót
+    - Then a belépés a banki felületre sikertelen, error: Invalid credentials or access not granted due to user account status or an existing user session.
+  - Example-4: érvénytelen felhasználónév és jelszó
+    - Given banki ügyfél regisztrálva van
+    - When megad egy helytelen felhasználónevet
+    - And megad egy helytelen jelszót
+    - Then a belépés a banki felületre sikertelen, error:  Invalid credentials or access not granted due to user account status or an existing user session.
+    
+- Rule-2: tranzakció történeti felülethez hozzáférés
+  - Example-1: érvényes belépés, volt korábban tranzakció
+    - Given banki ügyfél regisztrálva van
+    - And volt korábban banki tranzakciója
+    - When megadja az érvényes belépési adatokat
+    - And belépés után elnavigál a Checking --> View Checking fülre
+    - Then a felületen, egy táblázatban megjelennek a korábbi banki tranzakciói
+  - Example-2: érvényes belépés, nem volt korábban tranzakció
+    - Given banki ügyfél regisztrálva van
+    - And nem volt korábban banki tranzakciója
+    - When megadja az érvényes belépési adatokat
+    - And belépés után elnavigál a Checking --> View Checking fülre
+    - Then a felületen nem jelennek meg korábbi banki tranzakciók
+  - Example-3: érvényes belépés, rossz fülre navigálás
+    - Given banki ügyfél regisztrálva van
+    - And volt korábban banki tranzakciója
+    - When megadja az érvényes belépési adatokat
+    - And belépés után elnavigál a Checking --> New Checking fülre
+    - Then a felületen nem a korábbi banki tranzakciók jelennek meg, hanem egy új indítása
+    
+- Rule-3: megtakarításokhoz hozzáférés
+  - Example-1: érvényes lekötés
+    - Given banki ügyfél regisztrálva van
+    - And van megfelelő kerete megtakarítást lekötni
+    - When megadja az érvényes belépési adatokat
+    - And belépés után elnavigál a Savings --> New Savings fülre
+    - And elindít 25$ lekötést
+    - Then a lekötés sikeres
+  - Example-2: érvényestelen lekötés
+    - Given banki ügyfél regisztrálva van
+    - And van megfelelő kerete megtakarítást lekötni
+    - When megadja az érvényes belépési adatokat
+    - And belépés után elnavigál a Savings --> New Savings fülre
+    - And elindít 20$ lekötést
+    - Then a lekötés sikertelen, error: The initial deposit (\$20.00) entered does not meet the minimum amount (\$25.00) required. Please enter a valid deposit amount.
+    
+- Rule-4: pénzmozgatás meglévő számlák között
+  - Example-1: érvényes pénzmozgatás
+    - Given banki ügyfél regisztrálva van
+    - And van több érvényes számlája
+    - And van megfelelő kerete pénzt mozgatni
+    - When megadja az érvényes belépési adatokat
+    - And belépés után elnavigál a Transfer Between Accounts fülre
+    - And beállítja a From Accountra a Joint Checking számlát
+    - And beállítja a To Accountra az Individual Savings számlát
+    - And elindít 25$ lekötést
+    - Then a pénzmozgatás sikeres
+  - Example-2: érvénytelen pénzmozgatás
+      - Given banki ügyfél regisztrálva van
+      - And van több érvényes számlája
+      - And van megfelelő kerete pénzt mozgatni
+      - When megadja az érvényes belépési adatokat
+      - And belépés után elnavigál a Transfer Between Accounts fülre
+      - And beállítja a From Accountra a Joint Checking számlát
+      - And beállítja a To Accountra a Joint Checking számlát
+      - And elindít 25$ lekötést
+      - Then a pénzmozgatás sikertelen, error:  Can not trasnsfer from and to the same account.
+    
+- Rule-5: felhasználó adatainak módosítása
+  - Example-1: telefonszám módosítása sikeres
+    - Given banki ügyfél regisztrálva van
+    - When megadja az érvényes belépési adatokat
+    - And belépés után elnavigál a My Profile fülre
+    - And megváltoztatja a mobil számot: 123-366-3123-ra
+    - Then az adatmódosítás sikeres, success: Profile Updated Successfully.
+  - Example-2: titulus módosítása sikertelen
+    - Given banki ügyfél regisztrálva van
+    - When megadja az érvényes belépési adatokat
+    - And belépés után elnavigál a My Profile fülre
+    - And megváltoztatja a titulust "Please Select"-re
+    - And rákattint a "Submit' gombra
+    - Then az adatmódosítás sikertelen, popup: ! Kérjük válasszon egyet a lista elemei közül.
