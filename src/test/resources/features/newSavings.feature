@@ -6,7 +6,10 @@ Feature: The user can access the New Savings Page
       And has proper funds
       When enters a valid username and password
       And after successful login, navigates to Savings-->New Savings page
-      And submits 25$
+      And submits valid amount ($)
+        | validAmount |
+        | 25          |
+        | 30          |
       Then new saving is successful
 
     Scenario: Use valid username and password, invalid saving
@@ -14,5 +17,9 @@ Feature: The user can access the New Savings Page
       And has proper funds
       When enters a valid username and password
       And after successful login, navigates to Savings-->New Savings page
-      And submits 20$
+      And submits invalid amount ($)
+        | invalidAmount |
+        | 20            |
+        | 15            |
+        | 0             |
       Then new saving is failed, error: The initial deposit entered does not meet the minimum amount...
