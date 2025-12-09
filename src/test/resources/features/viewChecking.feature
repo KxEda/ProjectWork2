@@ -1,24 +1,20 @@
 @AccessToViewCheckingPage
 Feature: The user can access the View Checking Page
   Rule: Successful login and access to View Checking Page
-    Scenario: Use valid username and password, existing former transactions
-      Given the user is a registered customer
-      And there are existing former transactions
-      When enters a valid username and password
-      And after successful login, navigates to Checking-->View Checking page
+    Background:
+      Given the user is logged in
+      And is on View Checking page
+
+    Scenario: Existing former transactions
+      When there are former transactions existing
       Then the table with the former transactions listed is present
 
-    Scenario: Use valid username and password, no existing former transaction
-      Given the user is a registered customer
-      And there is no existing former transaction
-      When enters a valid username and password
-      And after successful login, navigates to Checking-->View Checking page
+    Scenario: No existing former transaction, empty list shown
+      When there is no former transaction existing
       Then the table with the former transactions listed is empty
 
-    Scenario: Use valid username and password, navigate to wrong subpage
-      Given the user is a registered customer
-      And there is no existing former transaction
-      When enters a valid username and password
-      And after successful login, navigates to Checking-->New Checking page
-      Then the table with the former transactions listed is not present, but the New Transaction page is
+    Scenario: No existing former transaction, navigating to New Transaction
+      When there is no existing former transaction
+      And user chooses to continue
+      Then the user is navigated to the New Transaction page
 
