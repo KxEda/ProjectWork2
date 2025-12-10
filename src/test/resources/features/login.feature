@@ -7,4 +7,4 @@ Feature: DigitalBank login and opening Home page
       | username | jodyex       |
       | password | pwofjodyex1N_|
 
-    Then the Home page is displayed
+    Then the user is logged in successfully and can see the Home page

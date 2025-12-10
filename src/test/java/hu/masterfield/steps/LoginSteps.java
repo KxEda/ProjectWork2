@@ -65,8 +65,8 @@ public class LoginSteps {
        loginPage.login(username, password);
     }
 
-    @Then("the Home page is displayed")
-    public void theHomePageIsDisplayed() {
+    @Then("the user is logged in successfully and can see the Home page")
+    public void theUserIsLoggedInSuccessfullyAndCanSeeTheHomePage() {
         HomePage homePage = new HomePage(driver, wait);
         homePage.checkIfUserIsLoggedIn();
     }
