@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class BannerPage {
+public class BannerPage extends BasePage{
     private WebDriver driver;
     private WebDriverWait wait;
 
@@ -25,8 +25,7 @@ public class BannerPage {
     private WebElement loginPageDigitalBankLogo;
 
     public BannerPage(WebDriver driver, WebDriverWait wait) {
-        this.driver = driver;
-        this.wait = wait;
+        super(driver, wait);
         PageFactory.initElements(this.driver, this);
     }
 
@@ -34,11 +33,12 @@ public class BannerPage {
         assertTrue(cookieBanner.isDisplayed());
     }
 
-    public void acceptCookies(){
+    public LoginPage acceptCookies(){
         wait.until(ExpectedConditions.visibilityOf(cookieOKButton));
         if (cookieOKButton.isDisplayed()) {
             cookieOKButton.click();
         }
+        return new LoginPage(driver, wait);
     }
 
     public void checkLoginPageAfterCookies(){

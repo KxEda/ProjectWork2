@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
-public class LoginPage {
+public class LoginPage extends BasePage{
     private WebDriver driver;
     private WebDriverWait wait;
 
@@ -22,16 +22,15 @@ public class LoginPage {
     private WebElement submitButton;
 
     public LoginPage(WebDriver driver, WebDriverWait wait) {
-        this.driver = driver;
-        this.wait = wait;
+        super(driver, wait);
         PageFactory.initElements(this.driver, this);
     }
 
-
-    public void login(String userName, String password){
-       userInput.sendKeys(userName);
+    public HomePage login(String userName, String password){
+        userInput.sendKeys(userName);
         passwordInput.sendKeys(password);
         submitButton.click();
+        return new HomePage(driver, wait);
     }
 
     public WebElement getUserInput() {

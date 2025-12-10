@@ -10,17 +10,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class HomePage {
-    private static WebDriver driver;
-    private static WebDriverWait wait;
+public class HomePage extends BasePage {
+    private WebDriver driver;
+    private WebDriverWait wait;
 
     @FindBy(xpath="//a[@id=\"home-menu-item\"]")
     private WebElement homePageMenuLogo;
 
+
     public HomePage(WebDriver driver, WebDriverWait wait) {
-        this.driver = driver;
-        this.wait = wait;
-        PageFactory.initElements(this.driver, this);
+        super(driver, wait);
+        PageFactory.initElements(driver,this);
     }
 
     public void checkIfUserIsLoggedIn(){
