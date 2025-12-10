@@ -10,17 +10,24 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class HomePage extends BasePage {
+public class HomePage{
     private WebDriver driver;
     private WebDriverWait wait;
 
     @FindBy(xpath="//a[@id=\"home-menu-item\"]")
     private WebElement homePageMenuLogo;
 
+    @FindBy(xpath = "//img[@class='user-avatar rounded-circle']")
+    private WebElement myProfileIcon;
+
+    @FindBy(xpath = "//a[@href='/bank/user/profile']")
+    private WebElement myProfileSelector;
+
 
     public HomePage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
-        PageFactory.initElements(driver,this);
+        this.driver = driver;
+        this.wait = wait;
+        PageFactory.initElements(driver, this);
     }
 
     public void checkIfUserIsLoggedIn(){
@@ -29,8 +36,10 @@ public class HomePage extends BasePage {
         assertEquals("Home", homePageMenuLogo.getText());
     }
 
-    public WebElement getHomePageMenuLogo() {
-
-        return homePageMenuLogo;
+    public ProfilePage openMyProfile(){
+        myProfileIcon.click();
+        myProfileSelector.click();
+        return new ProfilePage(driver, wait);
     }
+
 }

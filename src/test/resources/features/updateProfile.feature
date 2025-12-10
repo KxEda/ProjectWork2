@@ -2,8 +2,12 @@
 Feature: The user can access the Update Profile Page
   Rule: Successful login and access to My Profile page
     Background:
-      Given the user is logged in
-      And on My Profile page
+      Given the user opens the DigitalBank webpage
+      And accepts cookies
+      And logs in with valid username and password using datatable
+        | username | jodyex       |
+        | password | pwofjodyex1N_|
+      And is on the MyProfile page
 
     Scenario: Successful mobile data update
       When updates the <mobilePhoneNumber>

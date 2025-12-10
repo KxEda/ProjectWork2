@@ -44,7 +44,7 @@ public class LoginSteps {
     }
 
     @And("accepts cookies")
-    public void acceptCookies(){
+    public void acceptCookies() {
         BannerPage bannerPage = new BannerPage(driver, wait);
         bannerPage.checkIfCookieBannerIsPresent();
         bannerPage.acceptCookies();

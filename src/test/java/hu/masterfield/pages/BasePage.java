@@ -16,9 +16,6 @@ public class BasePage {
         PageFactory.initElements(this.driver, this);
     }
 
-    //isloaded
-    //takscreenshot
-
     public String getBaseUrl(){
         return BASE_URL;
     }

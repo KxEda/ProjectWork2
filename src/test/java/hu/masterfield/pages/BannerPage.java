@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class BannerPage extends BasePage{
+public class BannerPage{
     private WebDriver driver;
     private WebDriverWait wait;
 
@@ -25,7 +25,8 @@ public class BannerPage extends BasePage{
     private WebElement loginPageDigitalBankLogo;
 
     public BannerPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
+        this.driver = driver;
+        this.wait = wait;
         PageFactory.initElements(this.driver, this);
     }
 
