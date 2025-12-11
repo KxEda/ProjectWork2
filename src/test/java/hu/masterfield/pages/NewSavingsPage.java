@@ -8,7 +8,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class SavingsPage extends BasePage{
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class NewSavingsPage extends BasePage{
 
     @FindBy(xpath = "//h1[contains(text(),'Create Savings')]")
     WebElement savingsPageTite;
@@ -34,13 +37,13 @@ public class SavingsPage extends BasePage{
     @FindBy(xpath = "//button[@id='newSavingsSubmit']")
     WebElement savingsSubmitButton;
 
-    @FindBy(xpath = "//span[contains(text(),'Confirmation')]")
-    WebElement alertConfirmationLabel;
+    @FindBy(xpath = "//span[contains(text(),'Error')]")
+    WebElement alertErrorLabel;
 
-    @FindBy(xpath = "//span[@id='new-account-msg']")
-    WebElement confirmationText;
+    @FindBy(xpath = "//span[@id='new-account-error-msg']")
+    WebElement errorText;
 
-    public SavingsPage(WebDriver driver, WebDriverWait wait) {
+    public NewSavingsPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
         PageFactory.initElements(this.driver, this);
     }
@@ -49,7 +52,7 @@ public class SavingsPage extends BasePage{
         return savingsPageTite;
     }
 
-    public void startNewSaving(String accountType, String ownerShip, String accountName, String initialDeposit) {
+    public ViewSavingsPage startNewSaving(String accountType, String ownerShip, String accountName, String initialDeposit) {
         String xpathForSavings = String.format("//input[@type='radio' and @id='%s']",accountType);
         WebElement savingsRadio = driver.findElement(By.xpath(xpathForSavings));
         String xpathForIndividual = String.format("//input[@type='radio' and @id='%s']",ownerShip);
@@ -72,9 +75,13 @@ public class SavingsPage extends BasePage{
         initialDepositField.sendKeys(initialDeposit);
         wait.until(ExpectedConditions.elementToBeClickable(savingsSubmitButton));
         savingsSubmitButton.click();
+        return  new ViewSavingsPage(driver, wait);
     }
 
-    public void checkIfSavingWasSuccessful(){
-
+    public void checkErrorText(String initialDeposit){
+        assertTrue(savingsPageTite.isDisplayed());
+        assertTrue(alertErrorLabel.isDisplayed());
+        assertEquals("The initial deposit ($"+initialDeposit+".00) entered does not meet the minimum amount ($25.00) required. Please enter a valid deposit amount.", errorText.getText());
     }
+
 }

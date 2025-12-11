@@ -125,23 +125,28 @@ public class DigitalBankTestSteps {
     public void onTheNewSavingsPage() {
         HomePage homePage = new HomePage(driver, wait);
         homePage.navigateToSavingsMenu();
-        SavingsPage savingsPage = new SavingsPage(driver, wait);
-        savingsPage.pageIsLoaded(savingsPage.getSavingsPageTite());
+        NewSavingsPage newSavingsPage = new NewSavingsPage(driver, wait);
+        newSavingsPage.pageIsLoaded(newSavingsPage.getSavingsPageTite());
     }
 
     @When("new saving is started using {string}, {string}, {string}, {string}")
     public void createsANewSaving(String accountType, String ownership, String accountName, String initialDeposit) {
-        SavingsPage savingsPage = new SavingsPage(driver, wait);
-        savingsPage.pageIsLoaded(savingsPage.getSavingsPageTite());
-        savingsPage.startNewSaving(accountType, ownership, accountName, initialDeposit);
+        NewSavingsPage newSavingsPage = new NewSavingsPage(driver, wait);
+        newSavingsPage.pageIsLoaded(newSavingsPage.getSavingsPageTite());
+        newSavingsPage.startNewSaving(accountType, ownership, accountName, initialDeposit);
     }
 
     @Then("new saving is created successfully")
     public void newSavingIsCreatedSuccessfully() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        ViewSavingsPage viewSavingsPage = new ViewSavingsPage(driver, wait);
+        viewSavingsPage.checkIfSavingWasSuccessful();
     }
 
+    @Then("new saving is failed, error: The {string} entered does not meet the minimum amount...")
+    public void newSavingIsFailedErrorTheInitialDepositEnteredDoesNotMeetTheMinimumAmount(String initialDeposit) {
+        NewSavingsPage newSavingsPage = new NewSavingsPage(driver, wait);
+        newSavingsPage.checkErrorText(initialDeposit);
+    }
 }
 
 

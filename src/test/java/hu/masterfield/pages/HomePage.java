@@ -49,12 +49,12 @@ public class HomePage extends BasePage{
         return new ProfilePage(driver, wait);
     }
 
-    public SavingsPage navigateToSavingsMenu(){
+    public NewSavingsPage navigateToSavingsMenu(){
         wait.until(ExpectedConditions.elementToBeClickable(savingsMainMenu));
         savingsMainMenu.click();
         wait.until(ExpectedConditions.elementToBeClickable(newSavingsSubMenu));
         newSavingsSubMenu.click();
-        return new SavingsPage(driver, wait);
+        return new NewSavingsPage(driver, wait);
     }
 
     public WebElement getHomePageMenuLogo() {
