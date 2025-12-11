@@ -1,0 +1,18 @@
+@objects
+    digitalBankLogo                     css         body > div.sufee-login.d-flex.align-content-center.flex-wrap > div > div > div.login-logo > a > img
+    userNameLabel                       css         body > div.sufee-login.d-flex.align-content-center.flex-wrap > div > div > div.login-form > form > div:nth-child(1) > label > strong
+    passwordLabel                       css         body > div.sufee-login.d-flex.align-content-center.flex-wrap > div > div > div.login-form > form > div:nth-child(2) > label > strong
+
+= Main layout =
+    digitalBanklogo:
+        centered horizontally inside viewport
+
+    @on desktop
+        digitalBankLogo:
+            width <100px
+            height <50px
+
+    @on mobile
+        digitalBankLogo:
+            width <100px
+            height <50px
