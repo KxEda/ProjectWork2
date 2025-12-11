@@ -7,6 +7,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -27,6 +31,9 @@ public class LoginPage extends BasePage{
 
     @FindBy(xpath = "//span[contains(text(),'Error')]")
     private WebElement alertBoxErrorTitle;
+    
+    @FindBy(xpath = "//button[@aria-label='Close']")
+    private WebElement closeButton;
 
     public LoginPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -47,7 +54,17 @@ public class LoginPage extends BasePage{
     public void checkAlertErrorText(){
         assertTrue(alertBoxErrorTitle.isDisplayed());
         String errorText ="Invalid credentials or access not granted due to user account status or an existing user session.";
-        assertEquals(errorText, alertBoxErrorTitle.getText());
+        System.out.println(alertBox.getText());
+        String text = alertBox.getText();
+        String[] stringParts = text.split(" ");
+        String[] errorMessageParts = Arrays.copyOfRange(stringParts,1,stringParts.length);
+        String lastElementOfErrorMessage = errorMessageParts[errorMessageParts.length-1];
+        String[] lastElementOfErrorMessageParts = lastElementOfErrorMessage.split("\n");
+        List<String> listOfErrorMessageParts = new ArrayList<>((Arrays.asList(errorMessageParts)));
+        listOfErrorMessageParts.remove(lastElementOfErrorMessage);
+        listOfErrorMessageParts.add(lastElementOfErrorMessageParts[0]);
+        String errorMessage = String.join(" ",listOfErrorMessageParts).trim();
+        assertEquals(errorText, errorMessage);
     }
 
     public WebElement getUserInput() {

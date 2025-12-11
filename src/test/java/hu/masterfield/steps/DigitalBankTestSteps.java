@@ -18,7 +18,7 @@ import java.time.Duration;
 import java.util.Map;
 
 
-public class LoginSteps {
+public class DigitalBankTestSteps {
     private static WebDriver driver;
     private static WebDriverWait wait;
 
@@ -67,6 +67,27 @@ public class LoginSteps {
     public void theUserIsLoggedInSuccessfullyAndCanSeeTheHomePage() {
         HomePage homePage = new HomePage(driver, wait);
         homePage.checkIfUserIsLoggedIn();
+    }
+
+    @When("enters invalid {string} and {string} to login")
+    public void entersInvalidUserNameAndPasswordToLogin(String username, String password) {
+        LoginPage loginPage = new LoginPage(driver, wait);
+        loginPage.login(username, password);
+    }
+
+    @Then("the login is failed, error invalid credentials is shown")
+    public void failedLogin(){
+        LoginPage failedLoginPage = new LoginPage(driver, wait);
+        failedLoginPage.checkAlertBox();
+        failedLoginPage.checkAlertErrorText();
+    }
+
+    @And("is on the MyProfile page")
+    public void navigateToMyProfilePage(){
+        HomePage homePage = new HomePage(driver, wait);
+        homePage.openMyProfile();
+        ProfilePage profilePage = new ProfilePage(driver, wait);
+        profilePage.checkProfilePage();
     }
 
 }
