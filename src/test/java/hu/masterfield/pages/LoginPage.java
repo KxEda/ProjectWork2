@@ -11,10 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-public class LoginPage{
-    private WebDriver driver;
-    private WebDriverWait wait;
-
+public class LoginPage extends BasePage{
 
     @FindBy(xpath="//*[@id='username']")
     private WebElement userInput;
@@ -32,9 +29,8 @@ public class LoginPage{
     private WebElement alertBoxErrorTitle;
 
     public LoginPage(WebDriver driver, WebDriverWait wait) {
-        this.driver = driver;
-        this.wait = wait;
-        PageFactory.initElements(driver, this);
+        super(driver, wait);
+        PageFactory.initElements(this.driver, this);
     }
 
     public void login(String userName, String password){

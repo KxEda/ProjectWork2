@@ -4,7 +4,7 @@ Feature: The user can access the Update Profile Page
     Background:
       Given the user opens the DigitalBank webpage
       And accepts cookies
-      And logs in with valid username and password using datatable
+      And logs in with valid credentials
         | username | jodyex       |
         | password | pwofjodyex1N_|
       And is on the MyProfile page

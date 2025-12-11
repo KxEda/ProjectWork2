@@ -10,9 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class HomePage{
-    private WebDriver driver;
-    private WebDriverWait wait;
+public class HomePage extends BasePage{
 
     @FindBy(xpath="//a[@id=\"home-menu-item\"]")
     private WebElement homePageMenuLogo;
@@ -23,11 +21,9 @@ public class HomePage{
     @FindBy(xpath = "//a[@href='/bank/user/profile']")
     private WebElement myProfileSelector;
 
-
     public HomePage(WebDriver driver, WebDriverWait wait) {
-        this.driver = driver;
-        this.wait = wait;
-        PageFactory.initElements(driver, this);
+        super(driver, wait);
+        PageFactory.initElements(this.driver, this);
     }
 
     public void checkIfUserIsLoggedIn(){
@@ -37,7 +33,9 @@ public class HomePage{
     }
 
     public ProfilePage openMyProfile(){
+        wait.until(ExpectedConditions.elementToBeClickable(myProfileIcon));
         myProfileIcon.click();
+        wait.until(ExpectedConditions.elementToBeClickable(myProfileSelector));
         myProfileSelector.click();
         return new ProfilePage(driver, wait);
     }

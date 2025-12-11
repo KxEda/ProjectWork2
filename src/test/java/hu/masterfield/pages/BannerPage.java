@@ -11,9 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class BannerPage{
-    private WebDriver driver;
-    private WebDriverWait wait;
+public class BannerPage extends BasePage{
 
     @FindBy(xpath="//div[@id=\"freeprivacypolicy-com---nb\"]")
     private WebElement cookieBanner;
@@ -25,8 +23,7 @@ public class BannerPage{
     private WebElement loginPageDigitalBankLogo;
 
     public BannerPage(WebDriver driver, WebDriverWait wait) {
-        this.driver = driver;
-        this.wait = wait;
+        super(driver, wait);
         PageFactory.initElements(this.driver, this);
     }
 

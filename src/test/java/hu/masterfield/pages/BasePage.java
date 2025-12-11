@@ -5,8 +5,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BasePage {
-    private WebDriver driver;
-    private WebDriverWait wait;
+    protected WebDriver driver;
+    protected WebDriverWait wait;
 
     private static final String BASE_URL = "https://eng.digitalbank.masterfield.hu/bank/login";
 
