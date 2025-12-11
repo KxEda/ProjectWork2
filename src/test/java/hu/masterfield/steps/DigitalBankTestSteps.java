@@ -129,16 +129,19 @@ public class DigitalBankTestSteps {
         savingsPage.pageIsLoaded(savingsPage.getSavingsPageTite());
     }
 
-    @When("creates a new saving Account with <accountType>, <ownership>, <accountName> and <initialDeposit>")
-    public void createsANewSavingAccountWithAccountTypeOwnershipAccountNameAndInitialDeposit(DataTable table) {
+    @When("new saving is started using {string}, {string}, {string}, {string}")
+    public void createsANewSaving(String accountType, String ownership, String accountName, String initialDeposit) {
         SavingsPage savingsPage = new SavingsPage(driver, wait);
-        Map<String, String> newSaving = table.asMap(String.class, String.class);
-        String accountType = newSaving.get("accountType");
-        String ownership = newSaving.get("ownership");
-        String accountName = newSaving.get("accountName");
-        String initialDeposit = newSaving.get("initialDeposit");
+        savingsPage.pageIsLoaded(savingsPage.getSavingsPageTite());
         savingsPage.startNewSaving(accountType, ownership, accountName, initialDeposit);
     }
+
+    @Then("new saving is created successfully")
+    public void newSavingIsCreatedSuccessfully() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
+    }
+
 }
 
 
