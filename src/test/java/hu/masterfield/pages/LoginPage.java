@@ -56,6 +56,12 @@ public class LoginPage extends BasePage{
         String errorText ="Invalid credentials or access not granted due to user account status or an existing user session.";
         System.out.println(alertBox.getText());
         String text = alertBox.getText();
+        List<String> listOfErrorMessageParts = getStringsOfErrorMessage(text);
+        String errorMessage = String.join(" ",listOfErrorMessageParts).trim();
+        assertEquals(errorText, errorMessage);
+    }
+
+    private static List<String> getStringsOfErrorMessage(String text) {
         String[] stringParts = text.split(" ");
         String[] errorMessageParts = Arrays.copyOfRange(stringParts,1,stringParts.length);
         String lastElementOfErrorMessage = errorMessageParts[errorMessageParts.length-1];
@@ -63,8 +69,7 @@ public class LoginPage extends BasePage{
         List<String> listOfErrorMessageParts = new ArrayList<>((Arrays.asList(errorMessageParts)));
         listOfErrorMessageParts.remove(lastElementOfErrorMessage);
         listOfErrorMessageParts.add(lastElementOfErrorMessageParts[0]);
-        String errorMessage = String.join(" ",listOfErrorMessageParts).trim();
-        assertEquals(errorText, errorMessage);
+        return listOfErrorMessageParts;
     }
 
     public WebElement getUserInput() {
