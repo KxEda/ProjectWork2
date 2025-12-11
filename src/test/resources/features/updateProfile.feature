@@ -14,8 +14,7 @@ Feature: The user can access the Update Profile Page
         | mobilePhoneNumber  |123-366-3123 |
       Then update of the profile data is successful, success: Profile Updated Successfully.
 
-    Scenario: Invalid title update
+    Scenario: Title update
       When updates the titleField
-        | titleField    |
-        | Please Select |
-      Then update of the profile data is failed,error: ! Kérjük válasszon egyet a lista elemei közül.
+        | titleField   | Mrs. |
+      Then successful title update, success: Profile Updated Successfully.

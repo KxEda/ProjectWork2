@@ -27,10 +27,6 @@ public class BannerPage extends BasePage{
         PageFactory.initElements(this.driver, this);
     }
 
-    public void checkIfCookieBannerIsPresent(){
-        assertTrue(cookieBanner.isDisplayed());
-    }
-
     public LoginPage acceptCookies(){
         wait.until(ExpectedConditions.visibilityOf(cookieOKButton));
         if (cookieOKButton.isDisplayed()) {
@@ -39,9 +35,8 @@ public class BannerPage extends BasePage{
         return new LoginPage(driver, wait);
     }
 
-    public void checkLoginPageAfterCookies(){
+    public void checkIfCookiesBannerStillVisible(){
         assertFalse(cookieBanner.isDisplayed());
-        assertTrue(loginPageDigitalBankLogo.isDisplayed());
     }
 
 

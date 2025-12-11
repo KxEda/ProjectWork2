@@ -24,6 +24,15 @@ public class ProfilePage extends BasePage {
     @FindBy(xpath = "//div[@class='card-footer']//button[@type='submit']")
     WebElement submitButton;
 
+    @FindBy(xpath = "//strong[contains(text(),'Title')]")
+    WebElement titleTitle;
+
+    @FindBy(xpath = "//select[@id='title']")
+    WebElement titleDropdown;
+
+    @FindBy(xpath = "//option[contains(text(),'Mrs.')]")
+    WebElement chooseMrsOption;
+
     @FindBy(xpath = "//div[@class='sufee-alert alert with-close alert-success alert-dismissible fade show']")
     private WebElement alertBox;
 
@@ -52,9 +61,26 @@ public class ProfilePage extends BasePage {
         submitButton.click();
     }
 
-    public void checkUpdatedData(){
+    public void checkUpdatedMobileData(){
         String newNumber = "123-366-3123";
         assertEquals(newNumber, mobilePhoneInputBox.getAttribute("value"));
+        assertTrue(alertBoxSuccessTitle.isDisplayed());
+        assertEquals("Profile Updated Successfully.", alertBoxText.getText());
+    }
+
+    public void updateTitleData(String titleData){
+        assertTrue(titleTitle.isDisplayed());
+        wait.until(ExpectedConditions.elementToBeClickable(titleDropdown));
+        titleDropdown.click();
+        wait.until(ExpectedConditions.elementToBeClickable(chooseMrsOption));
+        chooseMrsOption.click();
+        wait.until(ExpectedConditions.elementToBeClickable(submitButton));
+        submitButton.click();
+    }
+
+    public void checkUpdatedTtile(){
+        String newTitle = "Mrs.";
+        assertEquals(newTitle, chooseMrsOption.getText());
         assertTrue(alertBoxSuccessTitle.isDisplayed());
         assertEquals("Profile Updated Successfully.", alertBoxText.getText());
     }

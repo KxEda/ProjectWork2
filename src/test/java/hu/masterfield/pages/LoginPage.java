@@ -17,6 +17,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LoginPage extends BasePage{
 
+    @FindBy(xpath = "//button[contains(text(),'Sign in')]")
+    private WebElement signInButton;
+
     @FindBy(xpath="//*[@id='username']")
     private WebElement userInput;
 
@@ -74,5 +77,9 @@ public class LoginPage extends BasePage{
 
     public WebElement getUserInput() {
         return userInput;
+    }
+
+    public WebElement getSignInButton() {
+        return signInButton;
     }
 }

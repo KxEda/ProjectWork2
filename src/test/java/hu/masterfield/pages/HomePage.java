@@ -15,11 +15,20 @@ public class HomePage extends BasePage{
     @FindBy(xpath="//a[@id=\"home-menu-item\"]")
     private WebElement homePageMenuLogo;
 
+    @FindBy(xpath = "//li[contains(text(),'Welcome Judy')]")
+    private WebElement welcomeJudy;
+
     @FindBy(xpath = "//img[@class='user-avatar rounded-circle']")
     private WebElement myProfileIcon;
 
     @FindBy(xpath = "//a[@href='/bank/user/profile']")
     private WebElement myProfileSelector;
+
+    @FindBy(xpath = "//a[@id='savings-menu']")
+    private WebElement savingsMainMenu;
+
+    @FindBy(xpath = "//a[@id='new-savings-menu-item']")
+    private WebElement newSavingsSubMenu;
 
     public HomePage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -27,8 +36,8 @@ public class HomePage extends BasePage{
     }
 
     public void checkIfUserIsLoggedIn(){
-        wait.until(ExpectedConditions.visibilityOf(homePageMenuLogo));
-        assertTrue(homePageMenuLogo.isDisplayed());
+        wait.until(ExpectedConditions.visibilityOf(welcomeJudy));
+        assertTrue(welcomeJudy.isDisplayed());
         assertEquals("Home", homePageMenuLogo.getText());
     }
 
@@ -40,4 +49,15 @@ public class HomePage extends BasePage{
         return new ProfilePage(driver, wait);
     }
 
+    public SavingsPage navigateToSavingsMenu(){
+        wait.until(ExpectedConditions.elementToBeClickable(savingsMainMenu));
+        savingsMainMenu.click();
+        wait.until(ExpectedConditions.elementToBeClickable(newSavingsSubMenu));
+        newSavingsSubMenu.click();
+        return new SavingsPage(driver, wait);
+    }
+
+    public WebElement getHomePageMenuLogo() {
+        return homePageMenuLogo;
+    }
 }
