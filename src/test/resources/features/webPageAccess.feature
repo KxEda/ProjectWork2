@@ -1,9 +1,9 @@
+@WebPageAccess
 Feature: The user can access the webpage
   Background:
     Given the user opens the DigitalBank webpage
     And accepts cookies
 
-  @WebPageAccess
   Rule: Successful login
   Scenario: Successful login
     When logs in with valid username and password using datatable

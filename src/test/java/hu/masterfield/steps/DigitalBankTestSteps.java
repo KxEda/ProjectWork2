@@ -5,6 +5,7 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import hu.masterfield.pages.LoginPage;
+import io.cucumber.java.PendingException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -90,4 +91,23 @@ public class DigitalBankTestSteps {
         profilePage.checkProfilePage();
     }
 
+    @When("updates the mobilephone number using datatable")
+    public void updatesTheMobilePhoneNumber(DataTable table) {
+       ProfilePage profilePage = new ProfilePage(driver, wait);
+       Map<String, String> updateNumber = table.asMap(String.class, String.class);
+       String mobilePhoneNumber= updateNumber.get("mobilePhoneNumber");
+       profilePage.updateMobilePhoneData(mobilePhoneNumber);
+    }
+
+    @Then("update of the profile data is successful, success: Profile Updated Successfully.")
+    public void updateOfTheProfileDataIsSuccessfulSuccessProfileUpdatedSuccessfully() {
+        ProfilePage profilePage = new ProfilePage(driver, wait);
+        profilePage.checkUpdatedData();
+    }
+
+    @When("updates the titleField")
+    public void updatesTheTitleField() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
+    }
 }
