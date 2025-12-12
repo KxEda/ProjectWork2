@@ -1,5 +1,6 @@
 package hu.masterfield.steps;
 
+import hu.masterfield.gspec.GSPECTest;
 import hu.masterfield.pages.*;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.After;
@@ -15,6 +16,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.IOException;
 import java.time.Duration;
 import java.util.Map;
 
@@ -74,6 +76,12 @@ public class DigitalBankTestSteps {
         homePage.checkIfUserIsLoggedIn();
     }
 
+    @Then("login page layout is ok")
+    public void loginPageLayoutIsOk() throws IOException {
+        GSPECTest gspecTest = new GSPECTest();
+        gspecTest.testForDesktop(driver);
+    }
+
     @When("enters invalid {string} and {string} to login")
     public void entersInvalidUserNameAndPasswordToLogin(String username, String password) {
         loginPage.pageIsLoaded(loginPage.getSignInButton());
@@ -89,7 +97,6 @@ public class DigitalBankTestSteps {
     @And("is on the MyProfile page")
     public void navigateToMyProfilePage() {
         homePage.openMyProfile();
-        ProfilePage profilePage = new ProfilePage(driver, wait);
         profilePage.checkProfilePage();
     }
 
@@ -120,7 +127,6 @@ public class DigitalBankTestSteps {
     @And("on the New Savings page")
     public void onTheNewSavingsPage() {
         homePage.navigateToSavingsMenu();
-        NewSavingsPage newSavingsPage = new NewSavingsPage(driver, wait);
         newSavingsPage.pageIsLoaded(newSavingsPage.getSavingsPageTite());
     }
 

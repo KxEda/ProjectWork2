@@ -1,18 +1,117 @@
 @objects
     digitalBankLogo                     css         body > div.sufee-login.d-flex.align-content-center.flex-wrap > div > div > div.login-logo > a > img
+    loginFormBox                        css         body > div.sufee-login.d-flex.align-content-center.flex-wrap > div > div > div.login-form
     userNameLabel                       css         body > div.sufee-login.d-flex.align-content-center.flex-wrap > div > div > div.login-form > form > div:nth-child(1) > label > strong
     passwordLabel                       css         body > div.sufee-login.d-flex.align-content-center.flex-wrap > div > div > div.login-form > form > div:nth-child(2) > label > strong
+    userNameInput                       xpath       //*[@id="username"]
+    passwordInput                       css         #password
+    signInButton                        css         #submit
+    signUpHereLink                      css         body > div.sufee-login.d-flex.align-content-center.flex-wrap > div > div > div.login-form > form > div.register-link.m-t-15.text-center > p:nth-child(1) > a
 
 = Main layout =
-    digitalBanklogo:
-        centered horizontally inside viewport
+    digitalBankLogo:
+        #selector   border-bottom-color rgb(135, 135, 135)
+        #selector   text-align  center
+        #selector   font-size 16px
+
+    loginFormBox:
+        #selector   background-attachment   scroll
+        #selector   background-image        none
+        #selector   color                   rgb(33, 37, 41)
+        #selector   display                 block
+
+    userNameLabel:
+        #selector   color           rgb(135, 135, 135)
+        #selector   font-family     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        #selector   font-size       16px
+
+    passwordLabel:
+        #selector   color           rgb(135, 135, 135)
+        #selector   font-family     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        #selector   font-size       16px
+
+    userNameInput:
+        #selector   background-clip     padding-box
+        #selector   background-color    rgb(255, 255, 255)
+        #selector   font-style          normal
+
+    passwordInput:
+            #selector   background-clip     padding-box
+            #selector   background-color    rgb(255, 255, 255)
+            #selector   font-style          normal
+
+    signInButton:
+            #selector   appearance          button
+            #selector   background-color    rgb(40, 167, 69)
+            #selector   display             inline-block
+
+    signUpHereLink:
+            #selector   color               rgb(255, 46, 68)
+            #selector   text-align          center
+            #selector   touch-action        manipulation
 
     @on desktop
         digitalBankLogo:
-            width <100px
-            height <50px
+            width 160px
+            height 40px
+
+        loginFormBox:
+            width   540px
+            height  465px
+
+        userNameLabel:
+            width   92px
+            height  21px
+
+        passwordLabel:
+            width   89px
+            height  21px
+
+        userNameInput:
+            width   480px
+            height  38px
+
+        passwordInput:
+            width   480px
+            height  38px
+
+        signInButton:
+            width   480px
+            height  51px
+
+        signUpHereLink:
+            width   ~98px
+            height  ~21px
 
     @on mobile
         digitalBankLogo:
-            width <100px
-            height <50px
+            width   <100px
+            height  <50px
+
+        loginFormBox:
+            width   <500px
+            height  <500px
+
+        userNameLabel:
+            width   <100px
+            height  <50px
+
+        passwordLabel:
+            width   <100px
+            height  <50px
+
+        userNameInput:
+            width   <500px
+            height  <50px
+
+        passwordInput:
+           width   <500px
+           height  <50px
+
+        signInButton:
+           width   <500px
+           height  <55px
+
+        signUpHereLink:
+           width   <100px
+           height  <25px
